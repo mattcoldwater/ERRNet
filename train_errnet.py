@@ -25,8 +25,7 @@ if opt.debug:
     opt.serial_batches = True
     opt.no_flip = True
 
-# modify the following code to 
-datadir = '/media/kaixuan/DATA/Papers/Code/Data/Reflection/'
+datadir = opt.root_dir 
 
 datadir_syn = join(datadir, 'VOCdevkit/VOC2012/PNGImages')
 datadir_real = join(datadir, 'real_train')

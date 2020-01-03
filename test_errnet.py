@@ -16,7 +16,7 @@ opt.no_log =True
 opt.display_id=0
 opt.verbose = False
 
-datadir = '/media/kaixuan/DATA/Papers/Code/Data/Reflection/'
+datadir = opt.root_dir # datadir = '/media/kaixuan/DATA/Papers/Code/Data/Reflection/'
 
 # Define evaluation/test dataset
 

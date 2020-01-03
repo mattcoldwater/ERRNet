@@ -178,10 +178,10 @@ class ERRNetModel(ERRNetBase):
     def print_network(self):
         print('--------------------- Model ---------------------')
         print('##################### NetG #####################')
-        networks.print_network(self.net_i)
+        # networks.print_network(self.net_i)
         if self.isTrain and self.opt.lambda_gan > 0:
             print('##################### NetD #####################')
-            networks.print_network(self.netD)
+            # networks.print_network(self.netD)
 
     def _eval(self):
         self.net_i.eval()

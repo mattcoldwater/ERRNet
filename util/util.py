@@ -187,7 +187,7 @@ term_width = int(term_width)
 TOTAL_BAR_LENGTH = 65.
 last_time = time.time()
 begin_time = last_time
-def progress_bar(current, total, msg=None):
+def progress_bar(current, total, msg=None, opt=None):
     global last_time, begin_time
     if current == 0:
         begin_time = time.time()  # Reset for new bar.
@@ -216,6 +216,12 @@ def progress_bar(current, total, msg=None):
 
     msg = ''.join(L)
     sys.stdout.write(msg)
+    ####################################################
+    if opt:
+        log_name = os.path.join(opt.checkpoints_dir, opt.name, 'loss_log.txt')
+        with open(log_name, "a") as log_file:
+            log_file.write(msg+'\n')
+    #####################################################
     for i in range(term_width-int(TOTAL_BAR_LENGTH)-len(msg)-3):
         sys.stdout.write(' ')
 

@@ -16,7 +16,8 @@ class BaseOptions():
         self.parser.add_argument('--name', type=str, default=None, help='name of the experiment. It decides where to store samples and models')
         self.parser.add_argument('--gpu_ids', type=str, default='0', help='gpu ids: e.g. 0  0,1,2, 0,2. use -1 for CPU')
         self.parser.add_argument('--model', type=str, default='errnet_model', help='chooses which model to use.', choices=model_names)
-        self.parser.add_argument('--checkpoints_dir', type=str, default='./checkpoints', help='models are saved here')
+        self.parser.add_argument('--root_dir', type=str, default='/data1/kangfu/haoyu/Data/Reflection/') #'/media/kaixuan/DATA/Papers/Code/Data/Reflection/'
+        self.parser.add_argument('--checkpoints_dir', type=str, default='/data1/kangfu/haoyu/Data/Reflection/checkpoints', help='models are saved here')
         self.parser.add_argument('--resume', '-r', action='store_true', help='resume from checkpoint')
         self.parser.add_argument('--resume_epoch', '-re', type=int, default=None, help='checkpoint to use. (default: latest')
         self.parser.add_argument('--seed', type=int, default=2018, help='random seed to use. Default=2018')

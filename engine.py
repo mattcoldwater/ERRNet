@@ -7,7 +7,6 @@ import sys
 from os.path import join
 from util.visualizer import Visualizer
 
-
 class Engine(object):
     def __init__(self, opt):
         self.opt = opt
@@ -16,10 +15,13 @@ class Engine(object):
         self.model = None
         self.best_val_loss = 1e6
 
-        self.__setup()
+        self.__setup(opt)
 
-    def __setup(self):
-        self.basedir = join('checkpoints', self.opt.name)
+    def __setup(self, opt):
+        if not os.path.exists(opt.root_dir):
+            os.mkdir(opt.root_dir)
+            
+        self.basedir = join(opt.checkpoints_dir, self.opt.name)
         if not os.path.exists(self.basedir):
             os.mkdir(self.basedir)
         
@@ -43,14 +45,13 @@ class Engine(object):
         for i, data in enumerate(train_loader):
             iter_start_time = time.time()
             iterations = self.iterations
-            
 
             model.set_input(data, mode='train')
             model.optimize_parameters(**kwargs)
             
             errors = model.get_current_errors()
             avg_meters.update(errors)
-            util.progress_bar(i, len(train_loader), str(avg_meters))
+            util.progress_bar(i, len(train_loader), str(avg_meters), opt)
             
             if not opt.no_log:
                 util.write_loss(self.writer, 'train', avg_meters, iterations)
