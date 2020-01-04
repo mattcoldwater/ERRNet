@@ -75,8 +75,8 @@ if __name__ == "__main__":
             engine.eval(eval_dataloader_ceilnet, dataset_name='testdata_table2')        
             engine.eval(eval_dataloader_real, dataset_name='testdata_real20')
 
-    return 0
     # ----------------------Main Loop for fine tune------------------------------
+    """
     set_learning_rate(1e-4)
     while engine.epoch < 80:
         if engine.epoch == 65:
@@ -85,3 +85,4 @@ if __name__ == "__main__":
             set_learning_rate(1e-5)
             
         engine.train(train_dataloader_fusion)
+    """
