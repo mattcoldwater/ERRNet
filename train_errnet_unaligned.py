@@ -12,7 +12,7 @@ def set_learning_rate(lr):
     for optimizer in engine.model.optimizers:
         util.set_opt_param(optimizer, 'lr', lr)
 
-# python train_errnet_unaligned.py --name my_errnet --hyper --unaligned_loss vgg --save_epoch_freq 30
+# python train_errnet_unaligned.py --name my_errnet --hyper --unaligned_loss vgg --save_epoch_freq 15
 
 if __name__ == "__main__":
     mp.set_start_method('spawn')
@@ -57,7 +57,7 @@ if __name__ == "__main__":
     engine.model.opt.lambda_gan = 0
     # engine.model.opt.lambda_gan = 0.01
     set_learning_rate(1e-4)
-    while engine.epoch < 60:
+    while engine.epoch < 62:
         if engine.epoch == 20:
             engine.model.opt.lambda_gan = 0.01 # gan loss is added after epoch 20
         if engine.epoch == 30:
