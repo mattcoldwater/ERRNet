@@ -42,6 +42,23 @@ class Engine(object):
         epoch = self.epoch
 
         epoch_start_time = time.time()
+        ########### for debug only
+        # for i, data in enumerate(train_loader):
+        #     iterations = self.iterations
+
+        #     model.set_input(data, mode='train')
+        #     model.optimize_parameters(**kwargs)
+        #     # print(data.keys()) # ['input', 'target_t', 'fn', 'real', 'target_r', 'unaligned']
+        #     # from PIL import Image
+        #     # from util.util import tensor2im
+        #     # for st in ['input', 'target_t', 'target_r']:
+        #     #     A = tensor2im(data[st])
+        #     #     im = Image.fromarray(A)
+        #     #     im.save(st+'.jpeg')
+        #     # del A
+        #     # del im
+        #     return 0
+        ############# for debug only
         for i, data in enumerate(train_loader):
             iter_start_time = time.time()
             iterations = self.iterations

@@ -9,6 +9,7 @@ import util.util as util
 import os
 
 # python test_errnet_unaligned.py --name errnet_060 --hyper -r --icnn_path /data1/kangfu/haoyu/Data/Reflection/checkpoints/errnet_060/errnet_060_00463920.pt --unaligned_loss vgg
+# python test_errnet_unaligned.py --name my_errnet --hyper -r --icnn_path /data1/kangfu/haoyu/Data/Reflection/checkpoints/my_errnet/errnet_latest.pt --unaligned_loss vgg
 
 opt = TrainOptions().parse()
 

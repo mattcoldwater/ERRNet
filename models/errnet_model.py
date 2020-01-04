@@ -296,7 +296,12 @@ class ERRNetModel(ERRNetBase):
             input_i = torch.cat(input_i, dim=1)
 
         output_i = self.net_i(input_i)
-
+        ################### debug only
+        # from PIL import Image
+        # A = tensor2im(output_i)
+        # im = Image.fromarray(A.astype('uint8')).convert('RGB')
+        # im.save('output.jpeg')
+        ####################
         self.output_i = output_i
 
         return output_i
