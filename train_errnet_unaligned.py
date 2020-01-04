@@ -12,7 +12,7 @@ def set_learning_rate(lr):
     for optimizer in engine.model.optimizers:
         util.set_opt_param(optimizer, 'lr', lr)
 
-# python train_errnet_unaligned.py --name my_errnet --hyper --unaligned_loss vgg --save_epoch_freq 15
+# python train_errnet_unaligned.py --name my_errnet --hyper --unaligned_loss vgg --save_epoch_freq 15 --nThreads 16
 
 if __name__ == "__main__":
     mp.set_start_method('spawn')
