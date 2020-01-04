@@ -107,6 +107,9 @@ def define_D(opt, in_channels=3):
     if len(opt.gpu_ids) > 0:
         assert(torch.cuda.is_available())
         netD.cuda(opt.gpu_ids[0])
+        if len(opt.gpu_ids) > 1:
+            netD = nn.DataParallel(netD, device_ids=opt.gpu_ids)
+            
     
     return netD
 

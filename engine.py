@@ -29,7 +29,6 @@ class Engine(object):
         
         """Model"""
         self.model = models.__dict__[self.opt.model]()
-        self.model = torch.nn.DataParallel(self.model, device_ids=[0, 1, 2, 3])
         self.model.initialize(opt)
         if not opt.no_log:
             self.writer = util.get_summary_writer(os.path.join(self.basedir, 'logs'))

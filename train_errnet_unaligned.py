@@ -7,12 +7,13 @@ import data.reflect_dataset as datasets
 import util.util as util
 import data
 import torch.multiprocessing as mp
+import torch
 
 def set_learning_rate(lr):
     for optimizer in engine.model.optimizers:
         util.set_opt_param(optimizer, 'lr', lr)
 
-# python train_errnet_unaligned.py --name my_errnet --hyper --unaligned_loss vgg --save_epoch_freq 15 --nThreads 16
+# python train_errnet_unaligned.py --name my_errnet --hyper --unaligned_loss vgg --save_epoch_freq 15 --gpu_ids 0,1,2,3
 
 if __name__ == "__main__":
     mp.set_start_method('spawn')
@@ -71,9 +72,9 @@ if __name__ == "__main__":
 
         engine.train(train_dataloader_fusion)
         
-        if engine.epoch % 5 == 0:
-            engine.eval(eval_dataloader_ceilnet, dataset_name='testdata_table2')        
-            engine.eval(eval_dataloader_real, dataset_name='testdata_real20')
+        # if engine.epoch % 5 == 0:
+        #     engine.eval(eval_dataloader_ceilnet, dataset_name='testdata_table2')    
+        #     engine.eval(eval_dataloader_real, dataset_name='testdata_real20')
 
     # ----------------------Main Loop for fine tune------------------------------
     """

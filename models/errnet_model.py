@@ -200,6 +200,9 @@ class ERRNetModel(ERRNetBase):
             in_channels += 1472
         
         self.net_i = arch.__dict__[self.opt.inet](in_channels, 3).to(self.device)
+        if len(self.opt.gpu_ids) > 1:
+            self.net_i = nn.DataParallel(self.net_i, device_ids=self.opt.gpu_ids)
+            
         networks.init_weights(self.net_i, init_type=opt.init_type) # using default initialization as EDSR
         self.edge_map = EdgeMap(scale=1).to(self.device)
 
