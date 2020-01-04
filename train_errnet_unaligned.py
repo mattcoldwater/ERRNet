@@ -26,7 +26,7 @@ if __name__ == "__main__":
     # ----------------------- data preparation -------------------
     # datadir_syn = join(datadir, 'VOCdevkit/VOC2012/PNGImages')
     # datadir_real = join(datadir, 'real_train')
-    datadir_unaligned = join(datadir, 'unaligned', 'unaligned_train250')
+    datadir_unaligned = join(datadir, 'unaligned', 'unaligned_train400')
 
     # train_dataset = datasets.CEILDataset(datadir_syn, read_fns('VOC2012_224_train_png.txt'), size=opt.max_dataset_size)
     # train_dataset_real = datasets.CEILTestDataset(datadir_real, enable_transforms=True)
@@ -58,7 +58,7 @@ if __name__ == "__main__":
     engine.model.opt.lambda_gan = 0
     # engine.model.opt.lambda_gan = 0.01
     set_learning_rate(1e-4)
-    while engine.epoch < 62:
+    while engine.epoch < 91: # 60
         if engine.epoch == 20:
             engine.model.opt.lambda_gan = 0.01 # gan loss is added after epoch 20
         if engine.epoch == 30:
@@ -68,6 +68,11 @@ if __name__ == "__main__":
         if engine.epoch == 45:
             set_learning_rate(5e-5)
         if engine.epoch == 50:
+            set_learning_rate(1e-5)
+        ## supposed to be fine tune period
+        if engine.epoch == 65:
+            set_learning_rate(5e-5)
+        if engine.epoch == 70:
             set_learning_rate(1e-5)
 
         engine.train(train_dataloader_fusion)
