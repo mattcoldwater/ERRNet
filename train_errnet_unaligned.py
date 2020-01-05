@@ -57,25 +57,21 @@ if __name__ == "__main__":
     # ----------------------Main Loop for direct training---------------------------
     engine.model.opt.lambda_gan = 0
     # engine.model.opt.lambda_gan = 0.01
-    set_learning_rate(1e-4)
+    set_learning_rate(2*1e-4)
     while engine.epoch < 91: # 60
-        if engine.epoch == 20:
-            engine.model.opt.lambda_gan = 0.01 # gan loss is added after epoch 20
-        if engine.epoch == 30:
-            set_learning_rate(5e-5)
         if engine.epoch == 40:
-            set_learning_rate(1e-5)
-        if engine.epoch == 45:
-            set_learning_rate(5e-5)
-        if engine.epoch == 50:
-            set_learning_rate(1e-5)
-        ## supposed to be fine tune period
-        if engine.epoch == 65:
-            set_learning_rate(5e-5)
-        if engine.epoch == 70:
-            set_learning_rate(1e-5)
+            engine.model.opt.lambda_gan = 0.01 # gan loss is added after epoch 20
+        if engine.epoch == 60:
+            set_learning_rate(2*5e-5)
+        if engine.epoch == 80:
+            set_learning_rate(2*1e-5)
+        if engine.epoch == 90:
+            set_learning_rate(2*5e-5)
+        if engine.epoch == 100:
+            set_learning_rate(2*1e-5)
 
         engine.train(train_dataloader_fusion)
+        break
         
         # if engine.epoch % 5 == 0:
         #     engine.eval(eval_dataloader_ceilnet, dataset_name='testdata_table2')    
