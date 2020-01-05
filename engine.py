@@ -14,6 +14,7 @@ class Engine(object):
         self.visualizer = None
         self.model = None
         self.best_val_loss = 1e6
+        self.val_loss_dir = 1
 
         self.__setup(opt)
 
@@ -117,7 +118,7 @@ class Engine(object):
         
         if loss_key is not None:
             val_loss = avg_meters[loss_key]
-            if val_loss < self.best_val_loss:
+            if self.val_loss_dir*val_loss < self.val_loss_dir*self.best_val_loss:
                 self.best_val_loss = val_loss
                 print('saving the best model at the end of epoch %d, iters %d' % 
                     (self.epoch, self.iterations))
