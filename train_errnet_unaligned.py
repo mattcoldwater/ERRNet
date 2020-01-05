@@ -71,7 +71,6 @@ if __name__ == "__main__":
             set_learning_rate(2*1e-5)
 
         engine.train(train_dataloader_fusion)
-        break
         
         # if engine.epoch % 5 == 0:
         #     engine.eval(eval_dataloader_ceilnet, dataset_name='testdata_table2')    
