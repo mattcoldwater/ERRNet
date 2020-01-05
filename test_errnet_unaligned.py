@@ -21,7 +21,7 @@ opt.verbose = False
 
 datadir = opt.root_dir # datadir = '/media/kaixuan/DATA/Papers/Code/Data/Reflection/'
 
-test_dataset_unaligned150 = datasets.RealDataset(join(datadir, 'unaligned/unaligned150/blended'))
+test_dataset_unaligned150 = datasets.RealDataset(join(datadir, 'unaligned/unaligned_test50/blended'))
 test_dataloader_unaligned150 = datasets.DataLoader(
     test_dataset_unaligned150, batch_size=1, shuffle=False,
     num_workers=opt.nThreads, pin_memory=True)
@@ -33,4 +33,4 @@ result_dir = join(datadir, 'results')
 if not os.path.exists(result_dir):
     os.mkdir(result_dir)
 
-res = engine.test(test_dataloader_unaligned150, savedir=join(result_dir, 'unaligned150'))
+res = engine.test(test_dataloader_unaligned150, savedir=join(result_dir, 'unaligned_test50'))
