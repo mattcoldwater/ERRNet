@@ -8,12 +8,15 @@ import util.util as util
 import data
 import torch.multiprocessing as mp
 import torch
+import os
+os.environ["CUDA_VISIBLE_DEVICES"] = "3"
 
 def set_learning_rate(lr):
     for optimizer in engine.model.optimizers:
         util.set_opt_param(optimizer, 'lr', lr)
 
 # python train_errnet_unaligned.py --name my_errnet --hyper --unaligned_loss vgg --save_epoch_freq 10
+# python train_errnet_unaligned.py --name origin_errnet --hyper --unaligned_loss vgg --save_epoch_freq 10
 
 if __name__ == "__main__":
     mp.set_start_method('spawn')
@@ -57,18 +60,22 @@ if __name__ == "__main__":
     # ----------------------Main Loop for direct training---------------------------
     engine.model.opt.lambda_gan = 0
     # engine.model.opt.lambda_gan = 0.01
-    set_learning_rate(2*1e-4)
-    while engine.epoch < 91: # 60
-        if engine.epoch == 40:
+    set_learning_rate(1e-4)
+    while engine.epoch < 82:
+        if engine.epoch == 20:
             engine.model.opt.lambda_gan = 0.01 # gan loss is added after epoch 20
-        if engine.epoch == 60:
-            set_learning_rate(2*5e-5)
-        if engine.epoch == 80:
-            set_learning_rate(2*1e-5)
-        if engine.epoch == 90:
-            set_learning_rate(2*5e-5)
-        if engine.epoch == 100:
-            set_learning_rate(2*1e-5)
+        if engine.epoch == 30:
+            set_learning_rate(5e-5)
+        if engine.epoch == 40:
+            set_learning_rate(1e-5)
+        if engine.epoch == 45:
+            set_learning_rate(5e-5)
+        if engine.epoch == 50:
+            set_learning_rate(1e-5)
+        if engine.epoch == 65:
+            set_learning_rate(5e-5)
+        if engine.epoch == 70:
+            set_learning_rate(1e-5)
 
         engine.train(train_dataloader_fusion)
         
@@ -85,5 +92,24 @@ if __name__ == "__main__":
         if engine.epoch == 70:
             set_learning_rate(1e-5)
             
+        engine.train(train_dataloader_fusion)
+    """
+
+    """ my method
+    engine.model.opt.lambda_gan = 0
+    # engine.model.opt.lambda_gan = 0.01
+    set_learning_rate(2*1e-4)
+    while engine.epoch < 91: # 60
+        if engine.epoch == 40:
+            engine.model.opt.lambda_gan = 0.01 # gan loss is added after epoch 20
+        if engine.epoch == 60:
+            set_learning_rate(2*5e-5)
+        if engine.epoch == 80:
+            set_learning_rate(2*1e-5)
+        if engine.epoch == 90:
+            set_learning_rate(2*5e-5)
+        if engine.epoch == 100:
+            set_learning_rate(2*1e-5)
+
         engine.train(train_dataloader_fusion)
     """

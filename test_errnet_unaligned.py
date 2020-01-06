@@ -8,6 +8,7 @@ import data.reflect_dataset as datasets
 import util.util as util
 import os
 import torch.multiprocessing as mp
+os.environ["CUDA_VISIBLE_DEVICES"] = "3"
 
 # python test_errnet_unaligned.py --name errnet_060 --hyper -r --icnn_path /data1/kangfu/haoyu/Data/Reflection/checkpoints/errnet_060/errnet_060_00463920.pt --unaligned_loss vgg
 # python test_errnet_unaligned.py --name my_errnet --hyper -r --icnn_path /data1/kangfu/haoyu/Data/Reflection/checkpoints/my_errnet/errnet_060_00023880.pt --unaligned_loss vgg
