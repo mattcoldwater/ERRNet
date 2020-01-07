@@ -9,8 +9,10 @@ import data
 import torch.multiprocessing as mp
 import torch
 import os
+os.environ["CUDA_VISIBLE_DEVICES"] = '3'
 
 # python eval_best.py --name my_errnet --hyper -r --unaligned_loss vgg
+# python eval_best.py --name origin_errnet --hyper -r --unaligned_loss vgg
 
 if __name__ == "__main__":
     mp.set_start_method('spawn')
@@ -23,7 +25,7 @@ if __name__ == "__main__":
     opt.display_id=0
     opt.verbose = False
 
-    datadir = opt.root_dir # datadir = '/media/kaixuan/DATA/Papers/Code/Data/Reflection/'
+    datadir = opt.root_dir 
 
     # ----------------------- data preparation -------------------
     eval_dataset_ceilnet = datasets.CEILTestDataset(join(datadir, 'testdata_CEILNET_table2'))
@@ -42,7 +44,7 @@ if __name__ == "__main__":
 
     # -------------------- engine start ---------------------------
     best_val_loss = 1e-6
-    for root, _, fnames in sorted(os.walk('/data1/kangfu/haoyu/Data/Reflection/checkpoints/my_errnet/')):
+    for root, _, fnames in sorted(os.walk(join(opt.checkpoints_dir, opt.name))):
         for fname in fnames:
             if fname.endswith('.pt') and 'best' not in fname:
                 engine = Engine(opt)

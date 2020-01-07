@@ -9,7 +9,8 @@ import data
 import torch.multiprocessing as mp
 import torch
 import os
-os.environ["CUDA_VISIBLE_DEVICES"] = "3"
+import shutil
+os.environ["CUDA_VISIBLE_DEVICES"] = '3'
 
 def set_learning_rate(lr):
     for optimizer in engine.model.optimizers:
@@ -25,6 +26,10 @@ if __name__ == "__main__":
     cudnn.benchmark = True
     opt.display_freq = 10 # copy from train_errnet.py
     datadir = opt.root_dir # datadir = '/media/kaixuan/DATA/Papers/Code/Data/Reflection/'
+
+    # -------------delete previous model checkpoints --------------
+    checkpoint_path = join(opt.checkpoints_dir, opt.name)
+    if os.path.exists(checkpoint_path): shutil.rmtree(checkpoint_path)
 
     # ----------------------- data preparation -------------------
     # datadir_syn = join(datadir, 'VOCdevkit/VOC2012/PNGImages')
@@ -96,6 +101,7 @@ if __name__ == "__main__":
     """
 
     """ my method
+    # ----------------------Main Loop for direct training---------------------------
     engine.model.opt.lambda_gan = 0
     # engine.model.opt.lambda_gan = 0.01
     set_learning_rate(2*1e-4)
